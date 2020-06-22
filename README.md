@@ -21,5 +21,7 @@ and
 bash run.sh
 ```
 
+### Others
+Feel free to ask any questions and make any comments
 
 
