@@ -22,7 +22,7 @@ bash run.sh
 ```
 
 ### Others
-- There are lots of #TODO sections which I think this is unnecessary in my cases, but will update it later if essential.
+- There are lots of #TODO sections which I think these are unnecessary in my cases, but will update it later if essential.
 - Code is written real quick, didnot consider unusual cases, so pls tell me if you find any bug
 - Feel free to ask any questions and make any comments
 
