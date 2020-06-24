@@ -6,7 +6,7 @@ import argparse
 import tqdm
 import logging
 
-def GenerateMixAudio(dataPath):
+def GenerateMixAudio(dataPath, useActive=True):
     dataType = ['tr', 'cv', 'tt']
     for i_type in dataType:
         audio_path = os.path.join(dataPath, 'audio', i_type)
@@ -61,10 +61,15 @@ def GenerateMixAudio(dataPath):
                 f3.write(mixName)
                 f3.write('\n')
 
-                s1, fs = sf.read(line[0])
-                s2, _ = sf.read(line[2])
-                s1_16k, lev1 = activlev(s1, fs, 'n')
-                s2_16k, lev2 = activlev(s2, fs, 'n')
+                s1_16k, fs = sf.read(line[0])
+                s2_16k, _ = sf.read(line[2])
+                '''
+                 In original create_mixtures.m, activlev must be done, which I think it may degrade the performance since it nonlinearly filters the signal
+                 However, most of experiments did that parts because this it's essential to control variable for publishing papers.
+                '''
+                if useActive:
+                    s1_16k, lev1 = activlev(s1_16k, fs, 'n')
+                    s2_16k, lev2 = activlev(s2_16k, fs, 'n')
 
                 weight_1 = pow(10, s1Snr / 20)
                 weight_2 = pow(10, s2Snr / 20)
@@ -94,7 +99,8 @@ def main(args):
     logging.basicConfig(level=logging.INFO)
 
     dataPath = args.data_dir
-    GenerateMixAudio(dataPath)
+    useActive = args.use_active
+    GenerateMixAudio(dataPath, useActive)
     logging.info("Finish generating mixture audio and mixture files")
 
 if __name__ == '__main__':
@@ -105,6 +111,11 @@ if __name__ == '__main__':
         "--data_dir",
         type=str,
         help='Input mixtures sources information data_dir as well as output data directory'
+    )
+    parser.add_argument(
+        "--use_active",
+        type=str,
+        help='Measure active speech level '
     )
     args = parser.parse_args()
     main(args)
