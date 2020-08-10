@@ -2,13 +2,13 @@
 
 input_dir=/home/yongyug/data/timit #Dataset files
 output_dir=/home/yongyug/2020_workspace/test_sep_make #output data dir, all output will be here
-nums_files=100 #numbers of training set we want for training
+nums_files=10 #numbers of training set we want for training
 state=train #Train for training and cross validation, test for inference
 use_active=True
 stage=0
 
 if [ ! -d $output_dir ];then
-	mkdir output_dir
+	mkdir $output_dir
 else
 	echo "$output_dir existed"
 fi
@@ -34,7 +34,7 @@ fi
 
 if [ $stage -le 2 ];then
 
-	python create_mixtures.py --data_dir $output_dir --use_active use_active
+	python create_mixtures.py --data_dir $output_dir --state $state --use_active $use_active
 
 fi
 

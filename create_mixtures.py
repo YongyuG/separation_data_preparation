@@ -6,8 +6,12 @@ import argparse
 import tqdm
 import logging
 
-def GenerateMixAudio(dataPath, useActive=True):
-    dataType = ['tr', 'cv', 'tt']
+def GenerateMixAudio(dataPath, state, useActive=True):
+    if state.upper() == 'TRAIN':
+        dataType = ['tr', 'cv']
+    else:
+        dataType = ['tt']
+    print(dataType)
     for i_type in dataType:
         audio_path = os.path.join(dataPath, 'audio', i_type)
         if not os.path.exists(os.path.join(audio_path)):
@@ -23,13 +27,12 @@ def GenerateMixAudio(dataPath, useActive=True):
             os.mkdir(outS2)
         if not os.path.exists(outMix):
             os.mkdir(outMix)
-        taskFile = ''
-        for i in os.listdir(os.path.join(dataPath, 'mix_files')):
-            if i_type in i:
-                taskFile = os.path.join(dataPath, 'mix_files', i)
 
-        if taskFile == '':
-            raise ValueError
+
+
+        taskFile = os.path.join(dataPath, 'mix_files', "{}.txt".format(i_type))
+	
+    
         if not os.path.exists(os.path.join(dataPath, 'text')):
             os.mkdir(os.path.join(dataPath, 'text'))
         sourceFile1 = os.path.join(dataPath, 'text', "{}_1".format(i_type))
@@ -47,7 +50,6 @@ def GenerateMixAudio(dataPath, useActive=True):
 
                 s1_tr = line[0]
                 s2_tr = line[2]
-
                 s1WavName = "{}_{}".format(line[0].split('/')[-2], line[0].split('/')[-1][:-4])
                 s2WavName = "{}_{}".format(line[2].split('/')[-2], line[2].split('/')[-1][:-4])
                 s1Snr = round(float(line[1]), 4)
@@ -99,8 +101,9 @@ def main(args):
     logging.basicConfig(level=logging.INFO)
 
     dataPath = args.data_dir
+    state = args.state
     useActive = args.use_active
-    GenerateMixAudio(dataPath, useActive)
+    GenerateMixAudio(dataPath, state, useActive)
     logging.info("Finish generating mixture audio and mixture files")
 
 if __name__ == '__main__':
@@ -111,6 +114,11 @@ if __name__ == '__main__':
         "--data_dir",
         type=str,
         help='Input mixtures sources information data_dir as well as output data directory'
+    )
+    parser.add_argument(
+        "--state",
+        type=str,
+        help='Define Generating train or test data '
     )
     parser.add_argument(
         "--use_active",

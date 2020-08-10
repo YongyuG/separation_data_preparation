@@ -1,3 +1,6 @@
+#Author: Yongyu Gao
+#Email : gaoyongyu@cloudwalk.cn
+
 import numpy as np
 import scipy.signal
 import scipy.sparse
