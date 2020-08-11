@@ -3,6 +3,7 @@ import random
 import numpy as np
 import argparse
 import logging
+import soundfile as sf
 def CreateFiles(input_dir, output_dir, nums_file, state):
     wavList = []
     mix_files = os.path.join(output_dir, 'mix_files')
@@ -13,7 +14,13 @@ def CreateFiles(input_dir, output_dir, nums_file, state):
         for file in files:
             if state.upper() in root.upper() and file.endswith('WAV') or file.endswith('wav'):
                 wavFile = os.path.join(root, file)
-                wavList.append(wavFile)
+                data, sr = sf.read(wavFile)
+                if len(data.shape) != 1:
+                    raise ValueError
+                if data.shape[0] < 10000:
+                    pass
+                else:
+                    wavList.append(wavFile)
     random.shuffle(wavList)
 
     if state.upper() == 'TRAIN':
