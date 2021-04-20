@@ -2,12 +2,12 @@
 
 Data generation code for most of speech separation projcet included: deep clustering, utterance-PIT, Conv-tasnet, etc. 
 
-<font color='red'> This repo is developed by LINUX, if you are a window user, you need to modify the variable inside the 
+This repo is developed by LINUX, if you are a window user, you need to modify the variable inside the 
 	
 	**create_mixtures.py  s1WavName and s2WavName**.
 	
-Try using 10 file to generate the mixtures first, and go for whole dataset if the code can successfully utilized
-I will update is ASAP to tackle the problems, and add some new function  </front>
+Try using 10 file to generate the mixtures first, and go for whole dataset if the code work successfully.
+I will update is ASAP to tackle the problems, and add some new function
 
 
 
