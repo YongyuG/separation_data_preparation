@@ -1,6 +1,11 @@
 ## Separation Data Preparation
 
 Data generation code for most of speech separation projcet included: deep clustering, utterance-PIT, Conv-tasnet, etc. 
+<font color='red'> This repo is developed by LINUX, if you are a window user, you need to modify the variable inside the create_mixtures.py  s1WavName and s2WavName  </
+<font color='red'> Try using 10 file to generate the mixtures first, and go for whole dataset if the code can successfully utilized  </
+<font color='red'> I will update is ASAP to tackle the problems, and add some new function </
+
+
 
 ### Why
 Originally, we used [create-speaker-mixtures.zip](http://www.merl.com/demos/deep-clustering/create-speaker-mixtures.zip) for WSJ0 data prepartion for speech separation. However, people who want to try separtion without "wsj0" may find it's hard to start. In addition, matlab implmentation is not user frendly for people who doesnt install matlab. This repo is to provide a good initialization for people interested in separation, and because it's all written in python, the code is very easy to use, to understand and to intergrate to own projects. **This code can be used for most of opensource and your own dataset**
