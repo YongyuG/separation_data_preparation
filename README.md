@@ -6,8 +6,8 @@ Data generation code for most of speech separation projcet included: deep cluste
 	
 	**create_mixtures.py  s1WavName and s2WavName**.
 	
-	Try using 10 file to generate the mixtures first, and go for whole dataset if the code can successfully utilized
- I will update is ASAP to tackle the problems, and add some new function  </front>
+Try using 10 file to generate the mixtures first, and go for whole dataset if the code can successfully utilized
+I will update is ASAP to tackle the problems, and add some new function  </front>
 
 
 
